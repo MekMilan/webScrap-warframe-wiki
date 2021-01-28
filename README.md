@@ -3,5 +3,5 @@
 webScrap da wiki do Warframe para puxar informações de Mods
 
 ```bash
-dependencias: BeautifulSoup e requests
+Depedências: BeautifulSoup e requests
 ```
