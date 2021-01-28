@@ -3,7 +3,6 @@ import requests
 from utils import cls
 from imgViewer import openImg
 from colors import *
-import os
 
 SITE = "https://warframe.fandom.com/pt-br/wiki/Mods"
 SITE_PREFIX = "https://warframe.fandom.com"
