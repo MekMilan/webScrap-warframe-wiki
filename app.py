@@ -3,8 +3,9 @@ import requests
 from utils import cls
 from imgViewer import openImg
 from colors import *
+import os
 
-SITE = "https://warframe.fandom.com/pt-br/wiki/Mods#ModList"
+SITE = "https://warframe.fandom.com/pt-br/wiki/Mods"
 SITE_PREFIX = "https://warframe.fandom.com"
 
 
@@ -16,16 +17,22 @@ def scrap(title):
     for item in soup.find_all('div', attrs={'class': 'tabbertab', 'title': title}):
         for x in item.find_all('span', attrs={'class': 'mod-tooltip'}):
             index += 1
-            print(f'Mod Name: {RED+x.text+RESET}')
+            #print(f'Mod Name: {RED+x.text+RESET}')
             for y in x.find_all('a', href=True):
                 print(f'Site: {CYAN} {SITE_PREFIX}' + y['href'] + RESET)
+                link = SITE_PREFIX + str(y['href'])
+                scrapImg(link)
 
     print(f'\nPesquisamos por ({title}) e tivemos {index} resultados.')
     input('\n\nTecle ENTER para continuar !')
 
 
 def scrapImg(imgLink):
-    pass
+    html = requests.get(imgLink).content
+    soup = BeautifulSoup(html, 'html.parser')
+    item = soup.find('div', attrs={'class': 'pi-theme-ModBox'})
+    result = item.find('img', attrs={'class': 'pi-image-thumbnail'})
+    print(result['src'])
 
 
 while True:
