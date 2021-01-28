@@ -63,4 +63,5 @@ while True:
         print(f'Vc inseriu ({wat}) esta nao é uma opcao valida\n\nPor favor informe uma das opcoes acima !')
         input('\n\ntecle enter para continuar !')
 
-print('\nFIM')
+cls()
+print('\nScript ended !\n')
