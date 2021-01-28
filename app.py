@@ -1,12 +1,12 @@
-# vai ter que pegar o nome de retorno depois acessar o site com o nome de retorno e dar scrap da imagem em si
-
 from bs4 import BeautifulSoup
 import requests
 from utils import cls
 from imgViewer import openImg
+from colors import *
 
 SITE = "https://warframe.fandom.com/pt-br/wiki/Mods#ModList"
 SITE_PREFIX = "https://warframe.fandom.com"
+
 
 def scrap(title):
     html = requests.get(SITE).content
@@ -16,26 +16,22 @@ def scrap(title):
     for item in soup.find_all('div', attrs={'class': 'tabbertab', 'title': title}):
         for x in item.find_all('span', attrs={'class': 'mod-tooltip'}):
             index += 1
-            print(x.text)
-        for link in item.find_all('a', href=True):
-            scrapImg(link)
-            print(link)
+            print(f'Mod Name: {RED+x.text+RESET}')
+            for y in x.find_all('a', href=True):
+                print(f'Site: {CYAN} {SITE_PREFIX}' + y['href'] + RESET)
 
-
-    print(f"\nResultado: {x}\n")
     print(f'\nPesquisamos por ({title}) e tivemos {index} resultados.')
     input('\n\nTecle ENTER para continuar !')
 
 
 def scrapImg(imgLink):
-    html = requests.get(SITE_PREFIX + imgLink).content
-    soup = BeautifulSoup(html, 'html.parser')
+    pass
 
 
 while True:
     cls()
 
-    opts = "Options: warframe, rifle, pistola, arma branca, sentinela, kubrow, kavat, aura, postura - close (para sair do script)"
+    opts = f"Options: {RED}warframe, rifle, pistola, arma branca, sentinela, kubrow, kavat, aura, postura - close (para sair do script){RESET}"
     print(opts)
 
     wat = input("\nOque vc procura: ")
@@ -78,4 +74,4 @@ while True:
         input('\n\ntecle enter para continuar !')
 
 cls()
-print('\nScript ended !\n')
+print('\nScript ended !')
